@@ -95,6 +95,10 @@ QQuickItem* createQMLItemFromComponent(QmlComponentPtr component) {
     QObject* createdObject = component->create();
     if (createdObject == nullptr) {
         qCritical() << QString("Unable to construct item from component %1").arg(component->url().toString());
+        auto errors = component->errors();
+        for (auto error : errors) {
+            qCritical() << error.toString();
+        }
     }
     return qobject_cast<QQuickItem*>(createdObject);
 }

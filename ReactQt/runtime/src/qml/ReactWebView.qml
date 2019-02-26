@@ -1,10 +1,10 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 
-import QtWebView 1.1
 import React 0.1 as React
+import QtWebEngine 1.7
 
-WebView {
+WebEngineView {
     id: webViewRoot
     property var p_source: ''
     property var webViewManager: null
@@ -30,13 +30,13 @@ WebView {
 
     onLoadingChanged: {
         switch(loadRequest.status) {
-        case WebView.LoadStartedStatus:
+        case WebEngineLoadRequest.LoadStartedStatus:
             webViewManager.sendOnLoadStartNotificationToJs(webViewRoot);
             break;
-        case WebView.LoadSucceededStatus:
+        case WebEngineLoadRequest.LoadSucceededStatus:
             webViewManager.sendOnLoadEndNotificationToJs(webViewRoot);
             break;
-        case WebView.LoadFailedStatus:
+        case WebEngineLoadRequest.LoadFailedStatus:
             webViewManager.sendOnErrorNotificationToJs(webViewRoot);
             break;
         }
